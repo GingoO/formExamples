@@ -1,20 +1,38 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+  <h2>Enregistre toi ducon !</h2>
+  <form (ngSubmit)="utilisateurSoumis(formulaireEnregistrement.value)" #formulaireEnregistrement="ngForm">
+      <div *ngIf="utilisateur.dirty && utilisateur.hasError('required')" class="error">Tu as oublié l'utilisateur n00b ! Y'a deux champs et t'es pas capable de les remplir tous les deux ?</div>
+    <div>
+      <label>Ton ptit nom</label><input name="username" ngModel required #utilisateur="ngModel"/>
+    </div>
+    <div *ngIf="motPasse.dirty && motPasse.hasError('required')" class="error">Tu as oublié le mot de passe n00b ! Y'a deux champs et t'es pas capable de les remplir tous les deux ?</div>
+    <div>
+        <label>Ton ptit mot de passe</label><input name="pass" type="password" ngModel required #motPasse="ngModel"/>
+    </div>
+    <div>
+      <button type="submit">Soumettre</button>
+    </div>
+  </form>
 
+  <h2>Enregistre toi une deuxième fois, mais par un form class driven, toujours ducon !</h2>
+<form [formGroup]="ageSexeForm" (ngSubmit)="ageSexeSoumis(ageSexeForm.value)">
+    <div *ngIf="age.dirty && age.hasError('required')" class="error">Tu as oublié l'âge n00b ! Y'a deux champs et t'es pas capable de les remplir tous les deux ?</div>
+    <div *ngIf="age.dirty && age.hasError('pattern')" class="error">Un âge, c'est un nombre généralement...</div>
+    <div>
+      <label>Ton âge</label><input formControlName="age"/>
+    </div>
+    <div *ngIf="sexe.dirty && sexe.hasError('required')" class="error">Tu as oublié le sexe n00b ! Y'a deux champs et t'es pas capable de les remplir tous les deux ?</div>
+    <div>
+        <label>Ton ptit sexe :wink:</label><input formControlName="sexe"/>
+    </div>
+    <div>
+      <button type="submit">Soumettre</button>
+    </div>
+</form>
+
+<input [(ngModel)]="person" />
+<div>{{ person | upperUnSurDeux }}</div>
+</div>
